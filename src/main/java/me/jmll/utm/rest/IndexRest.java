@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import me.jmll.utm.model.Link;
 import me.jmll.utm.model.Resource;
@@ -31,10 +33,12 @@ public class IndexRest {
 		ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentServletMapping();
 		List<Link> links = new ArrayList<Link>();
 		links.add(new Link(builder.path("/").build().toString(), "self"));
-		links.add(new Link(builder.path("/user").build().toString(), "user"));
-		Map<String, Object> response = new Hashtable<>(2);
+		links.add(new Link(builder.path("").build().toString() + "user/", "user"));
+		links.add(new Link(builder.path("").build().toString() + "directory/", "directory"));
+		links.add(new Link(builder.path("").build().toString() + "file/", "file"));
+		links.add(new Link(builder.path("").build().toString() + "notify/", "notify"));
+		Map<String, Object> response = new Hashtable<>(1);
 		response.put("_links", links);
-		response.put("version", "1");
 		return response;
 	}
 	
@@ -50,8 +54,17 @@ public class IndexRest {
 		ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentServletMapping();
 		Resource resource = new Resource();
 		resource.addLink(new Link(builder.path("/").build().toString(), "self"));
-		resource.addLink(new Link(builder.path("/user").build().toString(), "user"));
+		resource.addLink(new Link(builder.path("").build().toString() + "user/", "user"));
+		resource.addLink(new Link(builder.path("").build().toString() + "directory/", "directory"));
+		resource.addLink(new Link(builder.path("").build().toString() + "file/", "file"));
+		resource.addLink(new Link(builder.path("").build().toString() + "notify/", "notify"));
 		return resource;
 	}
 
+	@RequestMapping(value = { "", "/" }, method = RequestMethod.OPTIONS)
+	public ResponseEntity<?> showOptions() {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Allow", "OPTIONS,HEAD,GET");
+		return new ResponseEntity<>(null, headers, HttpStatus.NO_CONTENT);
+	}
 }
