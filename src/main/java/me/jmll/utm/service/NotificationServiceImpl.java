@@ -11,24 +11,42 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
 
+import me.jmll.utm.model.Notification;
+import me.jmll.utm.repository.NotificationRepository;
+
 @Service
 public class NotificationServiceImpl implements NotificationService {
 	@Autowired
 	private MailSender mailSender;
 	
+	@Autowired
+	NotificationRepository notificationRepository;
+	
 	private static final Logger logger = LogManager.getLogger();
+	
+	@Override
+	public List<Notification> getNotifications() {
+		return notificationRepository.getNotifications();
+	}
 	
 	/**
 	 * Define notify como método asíncrono
 	 * */
 	@Async
 	@Override
-	public void notify(String subject, String message, List<String> toAddress, List<String> ccAddress) {
+	public Notification notify(String subject, String message, List<String> toAddress, List<String> ccAddress) {
+		Notification notification = new Notification();
 		StopWatch stopwatch = new StopWatch();
 		stopwatch.start();
 		String threadName = Thread.currentThread().getName();
 		logger.info("{} started subject={}, message={}, toAddress={}, ccAddress={}", threadName,
 				subject, message, toAddress, ccAddress);
+		
+		notification.setSubject(subject);
+		notification.setMessage(message);
+		notification.setToAddress(toAddress);
+		notification.setCcAddress(ccAddress);
+
 		/**
 		 * Crea un objeto de tipo SimpleMailMessage
 		 * configurando To con setTo y el valor de (String.join(",", toAddress)
@@ -51,6 +69,8 @@ public class NotificationServiceImpl implements NotificationService {
 		stopwatch.stop();
 		logger.info("{} took {} secs", threadName,
 				stopwatch.getTotalTimeSeconds());
+		notificationRepository.addNotification(notification);
+		return notification;
 	}
 
 }

@@ -147,8 +147,8 @@ public class RootContextConfig implements AsyncConfigurer, SchedulingConfigurer 
 	    JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 	    mailSender.setHost("smtp.gmail.com");
 	    mailSender.setPort(587);
-	    mailSender.setUsername("me@jose-manuel.me");
-	    mailSender.setPassword("hhthlspdqidujhrj");
+	    mailSender.setUsername("josetestingjava@gmail.com");
+	    mailSender.setPassword("testpassword123");
 	    Properties mailProperties = mailSender.getJavaMailProperties();
 	    mailProperties.put("mail.transport.protocol", "smtp");
 	    mailProperties.put("mail.smtp.auth", "true");

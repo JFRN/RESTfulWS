@@ -22,7 +22,7 @@ public class NotificationController {
 	@Autowired
 	NotificationService notificationService;
 	
-	@RequestMapping(value = "notify",
+	@RequestMapping(value = "notifySimple",
 			method = RequestMethod.POST)
 	@ResponseBody
 	public View notify(@RequestParam("subject") String subject,
