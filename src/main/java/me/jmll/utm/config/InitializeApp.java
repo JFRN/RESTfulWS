@@ -62,7 +62,7 @@ public class InitializeApp implements WebApplicationInitializer
         DispatcherServlet servlet = new DispatcherServlet(restContext);
         servlet.setDispatchOptionsRequest(true);
         dispatcher = container.addServlet("springRestDispatcher", servlet);
-        dispatcher.setLoadOnStartup(2);
+        dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/api/v1/*");
         
         /**

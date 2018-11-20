@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.springframework.http.HttpMethod;
 
 @XmlRootElement
-public class OptionsDoc {
+public class RestOptionDocumenter {
 	private Map<HttpMethod, String> methods = new Hashtable<>();
 
 	@XmlElement(name = "methods")

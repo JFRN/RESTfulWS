@@ -10,7 +10,7 @@ import java.util.Map;
 import me.jmll.utm.model.File;
 import me.jmll.utm.model.FileLinkListResource;
 import me.jmll.utm.model.Link;
-import me.jmll.utm.model.OptionsDoc;
+import me.jmll.utm.model.RestOptionDocumenter;
 import me.jmll.utm.rest.exception.ResourceNotFoundException;
 import me.jmll.utm.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class DirectoryRest {
 		methods.put(HttpMethod.GET, "Lists specified directory contents in parameter 'dir'");
 		methods.put(HttpMethod.OPTIONS, "Resource documentation");
 
-		OptionsDoc options = new OptionsDoc();
+		RestOptionDocumenter options = new RestOptionDocumenter();
 		options.setMethods(methods);
 
 		return new ResponseEntity<>(options, headers, HttpStatus.OK);

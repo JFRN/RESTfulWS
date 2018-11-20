@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 import me.jmll.utm.form.NotificationForm;
 import me.jmll.utm.model.Link;
 import me.jmll.utm.model.NotificationLinkListResource;
-import me.jmll.utm.model.OptionsDoc;
+import me.jmll.utm.model.RestOptionDocumenter;
 import me.jmll.utm.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -41,7 +41,7 @@ public class NotificationRest {
 		methods.put(HttpMethod.OPTIONS, "Resource documentation.");
 		methods.put(HttpMethod.POST, "Submits notification to send.");
 
-		OptionsDoc options = new OptionsDoc();
+		RestOptionDocumenter options = new RestOptionDocumenter();
 		options.setMethods(methods);
 
 		return new ResponseEntity<>(options, headers, HttpStatus.OK);

@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Hashtable;
 import java.util.Map;
-import me.jmll.utm.model.OptionsDoc;
+import me.jmll.utm.model.RestOptionDocumenter;
 import me.jmll.utm.rest.exception.ResourceNotFoundException;
 import me.jmll.utm.service.FileService;
 import me.jmll.utm.view.DownloadView;
@@ -41,7 +41,7 @@ public class FileRest {
 		methods.put(HttpMethod.POST, "Uploads specified file in parameter 'path'.");
 		methods.put(HttpMethod.DELETE, "Deletes specified file in parameter 'path'.");
 
-		OptionsDoc options = new OptionsDoc();
+		RestOptionDocumenter options = new RestOptionDocumenter();
 		options.setMethods(methods);
 
 		return new ResponseEntity<>(options, headers, HttpStatus.OK);
