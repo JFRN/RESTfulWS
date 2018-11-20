@@ -18,6 +18,7 @@ import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.Unmarshaller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.RequestToViewNameTranslator;
 import org.springframework.web.servlet.ViewResolver;
@@ -87,8 +88,16 @@ public class ServletContextConfig extends WebMvcConfigurerAdapter {
 	 * Configura MultipartResolver con StandardServletMultipartResolver
 	 */
 	@Bean
-	public MultipartResolver multipartResolver() {
+	public MultipartResolver simpleMultipartResolver() {
 		return new StandardServletMultipartResolver();
+	}
+	
+	@Bean
+	public CommonsMultipartResolver multipartResolver(){
+	    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+	    multipartResolver.setDefaultEncoding("UTF-8");
+	    multipartResolver.setMaxUploadSize(-1);
+	    return multipartResolver;
 	}
 
 	/**

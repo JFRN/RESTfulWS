@@ -64,7 +64,7 @@ public class IndexRest {
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.OPTIONS)
 	public ResponseEntity<?> showOptions() {
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Allow", "OPTIONS,HEAD,GET");
+		headers.add("Allow", "GET,OPTIONS");
 		return new ResponseEntity<>(null, headers, HttpStatus.NO_CONTENT);
 	}
 }
